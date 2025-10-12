@@ -2,7 +2,7 @@
 
 [project]
 name = "lyricsipsum"
-version = "1.0.0"
+version = "1.1.0"
 description = "Generates Lorem Ipsum text using song lyrics"
 authors = [
     {name="Steve Scholnick", email="scholnicks@gmail.com"}
