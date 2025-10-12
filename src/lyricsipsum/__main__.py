@@ -114,5 +114,5 @@ def configDirectory() -> Path:
 if __name__ == "__main__":
     try:
         main()
-    except:
+    except KeyboardInterrupt:
         sys.exit(0)
