@@ -56,6 +56,7 @@ def main() -> None:
             print(f"{song.title}\n\n{song.lyrics}\n")
         else:
             print(f"\n{song.lyrics}\n")
+
     sys.exit(0)
 
 
@@ -96,7 +97,7 @@ def buildGenius() -> Genius:
         with configFile.open("rb") as f:
             config = tomllib.load(f)
 
-    genius: Genius = Genius(os.environ.get("GENIUS_ACCESS_TOKEN", config.get("client", {}).get("access_token", "")))
+    genius: Genius = Genius(os.environ.get("GENIUS_ACCESS_TOKEN", ""))
     genius.verbose = arguments["--verbose"] or config.get("client", {}).get("verbose", False)
     genius.skip_non_songs = config.get("client", {}).get("skip_non_songs", True)
     genius.excluded_terms = config.get("client", {}).get("excluded_terms", ["(Remix)", "(Live)"])
@@ -113,5 +114,5 @@ def configDirectory() -> Path:
 if __name__ == "__main__":
     try:
         main()
-    except KeyboardInterrupt:
+    except:
         sys.exit(0)

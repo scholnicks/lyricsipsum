@@ -21,6 +21,26 @@ Options:
 pip install lyricsipsum
 ```
 
+### Create Configuration Directory
+```bash
+mkdir -p ~/.config/lyricsipsum
+```
+
+### Create configuration file
+```bash
+cat <<EOF > ~/.config/lyricsipsum.config.toml
+[client]
+verbose=true
+skip_non_song=true
+excluded_terms=["(Remix)", "(Live)"]
+remove_section_headers=true
+timeout=15
+EOF
+```
+
+### Setup Genuis API Access
+Following Authorization instructions on https://lyricsgenius.readthedocs.io/en/master/setup.html
+
 ## License
 
 lyricsipsum is freeware released under the [MIT License](https://github.com/scholnicks/lyricsipsum/blob/main/LICENSE).
