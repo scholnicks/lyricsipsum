@@ -20,7 +20,7 @@ Options:
 """
 
 import json
-# import os
+import os
 import random
 import re
 import sys
