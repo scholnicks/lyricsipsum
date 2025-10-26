@@ -187,14 +187,14 @@ all = ["flake8 (>=7.1.1)", "mypy (>=1.11.2)", "pytest (>=8.3.2)", "ruff (>=0.6.2
 
 [[package]]
 name = "lyricsgenius"
-version = "3.7.2"
+version = "3.7.5"
 description = "Download lyrics and metadata from Genius.com"
 optional = false
-python-versions = ">=3.10"
+python-versions = ">=3.11"
 groups = ["main"]
 files = [
-    {file = "lyricsgenius-3.7.2-py3-none-any.whl", hash = "sha256:edd0769ac64e7276695d7d7e2018a51fa1c23598a0f38fcb15a0c659fdb6bc33"},
-    {file = "lyricsgenius-3.7.2.tar.gz", hash = "sha256:01ad51fdca6f7f5a7bc1e24d2a1dc513e664ceaa9abb59f7da9362b16a0a173a"},
+    {file = "lyricsgenius-3.7.5-py3-none-any.whl", hash = "sha256:0c11f864cbd735c46171b5d5bc970edcc3815d9f1aa5caf5e546bddb51bc531b"},
+    {file = "lyricsgenius-3.7.5.tar.gz", hash = "sha256:c4f10c14f7980455c65c87d0cfd1086be0966daecaf99693032d36b65a38aa16"},
 ]
 
 [package.dependencies]
