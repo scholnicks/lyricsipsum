@@ -31,7 +31,7 @@ from pathlib import Path
 from docopt import docopt
 from lyricsgenius import Genius
 
-arguments: dict = {}
+arguments = {}
 
 
 @dataclass
@@ -72,7 +72,7 @@ def readLyricsFromFile() -> list[Song]:
 
 def saveLyricsToFile() -> None:
     """Fetches lyrics from Genius and saves them to a file"""
-    songs: list[Song] = readLyricsFromFile() if jsonPath().exists() else []
+    songs = readLyricsFromFile() if jsonPath().exists() else []
     artist = buildGenius().search_artist(arguments["--save"], max_songs=int(arguments["--number"]), sort="popularity")
     for song in artist.songs:
         if song.lyrics:
@@ -91,13 +91,13 @@ def jsonPath() -> Path:
 
 def buildGenius() -> Genius:
     """Builds and returns a Genius object"""
-    config: dict = {}
-    configFile: Path = configDirectory() / "config.toml"
+    config = {}
+    configFile = configDirectory() / "config.toml"
     if configFile.exists():
         with configFile.open("rb") as f:
             config = tomllib.load(f)
 
-    genius: Genius = Genius(os.environ.get("GENIUS_ACCESS_TOKEN", ""))
+    genius = Genius(os.environ.get("GENIUS_ACCESS_TOKEN", ""))
     genius.verbose = arguments["--verbose"] or config.get("client", {}).get("verbose", False)
     genius.skip_non_songs = config.get("client", {}).get("skip_non_songs", True)
     genius.excluded_terms = config.get("client", {}).get("excluded_terms", ["(Remix)", "(Live)"])
