@@ -51,7 +51,7 @@ def main() -> None:
     if arguments["--save"]:
         saveLyricsToFile()
     else:
-        song: Song = random.choice(readLyricsFromFile())
+        song = random.choice(readLyricsFromFile())
         if arguments["--title"]:
             print(f"{song.title}\n\n{song.lyrics}\n")
         else:
