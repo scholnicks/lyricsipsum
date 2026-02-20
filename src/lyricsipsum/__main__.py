@@ -43,7 +43,7 @@ class Song:
 def main() -> None:
     """Main Method"""
     global arguments
-    arguments = docopt(__doc__, version="lyricsipsum 1.1.4")
+    arguments = docopt(__doc__, version="lyricsipsum 1.1.5")
 
     if not configDirectory().exists():
         configDirectory().mkdir(parents=True, exist_ok=True)
@@ -116,3 +116,4 @@ if __name__ == "__main__":
         main()
     except KeyboardInterrupt:
         sys.exit(0)
+
