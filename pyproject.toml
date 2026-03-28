@@ -1,19 +1,20 @@
-# vi: set syntax=toml ts=4 sw=4 sts=4 et ff=unix ai si :
-
 [project]
 name = "lyricsipsum"
 version = "1.1.5"
 description = "Generates Lorem Ipsum text using song lyrics"
-authors = [
-    {name="Steve Scholnick", email="scholnicks@gmail.com"}
-]
-readme = "README.md"
-license="MIT"
-license-files=["LICENSE"]
+authors = [{ name = "Steve Scholnick", email = "scholnicks@gmail.com" }]
 requires-python = ">=3.13"
-dependencies = [
-    "docopt-ng (>=0.9.0,<0.10.0)",
-    "lyricsgenius (>=3.7.2,<4.0.0)"
+readme = "README.md"
+license = "MIT"
+keywords = [
+    "lorem",
+    "ipsum",
+    "text",
+    "generator",
+    "lyrics",
+    "utility",
+    "command-line",
+    "cli",
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -21,21 +22,31 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
     "License :: OSI Approved :: MIT License",
-    "Topic :: Utilities"
+    "Topic :: Utilities",
 ]
-keywords = ["lorem", "ipsum", "text", "generator", "lyrics", "utility", "command-line", "cli"]
+dependencies = [
+    "docopt-ng (>=0.9.0,<0.10.0)",
+    "lyricsgenius (>=3.7.2,<4.0.0)",
+]
+license-files = ["LICENSE"]
 
 [project.urls]
 homepage = "https://pypi.org/project/lyricsipsum/"
 repository = "https://github.com/scholnicks/lyricsipsum/"
 issues = "https://github.com/scholnicks/lyricsipsum/issues"
 
-[tool.poetry]
-packages = [{include = "lyricsipsum", from = "src"}]
+[project.scripts]
+lyricsipsum = "lyricsipsum.__main__:main"
+
+[tool.hatch.build.targets.sdist]
+include = ["src/lyricsipsum"]
+
+[tool.hatch.build.targets.wheel]
+include = ["src/lyricsipsum"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src/lyricsipsum" = "lyricsipsum"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.poetry.scripts]
-lyricsipsum = "lyricsipsum.__main__:main"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
