@@ -1,6 +1,6 @@
 [project]
 name = "lyricsipsum"
-version = "1.1.5"
+version = "1.1.6"
 description = "Generates Lorem Ipsum text using song lyrics"
 authors = [{ name = "Steve Scholnick", email = "scholnicks@gmail.com" }]
 requires-python = ">=3.13"
