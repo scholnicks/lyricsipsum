@@ -101,20 +101,20 @@ wheels = [
 
 [[package]]
 name = "lyricsgenius"
-version = "3.11.0"
+version = "3.12.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "beautifulsoup4" },
     { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7d/94/bc4723534c32005c03902cee42be9cea43ca1b133906e95211b9fc9513c1/lyricsgenius-3.11.0.tar.gz", hash = "sha256:daafe7e5a308f3253c2a2ec806859ec0c7822706466b39a7fd0650d4dc4345a7", size = 519038, upload-time = "2026-03-15T03:55:02.927Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/52/02/10920b2c95fe2a9e575a3a710a1f2dc11c10ca642a034c4fe43d3b905308/lyricsgenius-3.12.0.tar.gz", hash = "sha256:4faf5804bc890d68f9de513acb2028b1ae251559270326bd59945a2f9e527daf", size = 518328, upload-time = "2026-04-11T06:12:06.119Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/87/7b/e4957b9b318b8566c9cafbafa1f66023fa367ada81c4044cec583c69eec5/lyricsgenius-3.11.0-py3-none-any.whl", hash = "sha256:1843e6b1dd65d327ea232fd6deda08a012f9631fdad0e4be2904f89aece2877e", size = 51440, upload-time = "2026-03-15T03:55:00.941Z" },
+    { url = "https://files.pythonhosted.org/packages/82/97/dd6df7d9e86b4549e95282acdd482376bab5df5bea2f8ee0b25f45682989/lyricsgenius-3.12.0-py3-none-any.whl", hash = "sha256:72aacd27c196e619804f5d58fe303fb671e99d84a059dc44caa449a665e7df55", size = 50649, upload-time = "2026-04-11T06:12:04.441Z" },
 ]
 
 [[package]]
 name = "lyricsipsum"
-version = "1.1.5"
+version = "1.1.6"
 source = { editable = "." }
 dependencies = [
     { name = "docopt-ng" },
