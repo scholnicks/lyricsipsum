@@ -7,6 +7,7 @@ Usage:
     lyricsipsum [options]
 
 Options:
+    -c, --clean         Remove profanity from return lyrics
     -d, --debug         Enable debug mode
     -h, --help          Show this help screen
     -n, --number=<num>  Number of songs to download [default: 50]
@@ -18,7 +19,7 @@ Options:
 ## Installation
 
 ```bash
-pip install lyricsipsum
+pipx install lyricsipsum
 ```
 
 ### Create Configuration Directory
@@ -32,7 +33,7 @@ cat <<EOF > ~/.config/lyricsipsum.config.toml
 [client]
 verbose=true
 skip_non_song=true
-excluded_terms=["(Remix)", "(Live)"]
+excluded_terms=["(Remix)", "(Live)", "(Explicit)"]
 remove_section_headers=true
 timeout=15
 EOF
@@ -42,5 +43,4 @@ EOF
 Following Authorization instructions on https://lyricsgenius.readthedocs.io/en/master/setup.html
 
 ## License
-
 lyricsipsum is freeware released under the [MIT License](https://github.com/scholnicks/lyricsipsum/blob/main/LICENSE).

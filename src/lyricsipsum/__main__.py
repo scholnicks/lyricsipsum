@@ -11,6 +11,7 @@ Usage:
     lyricsipsum [options]
 
 Options:
+    -c, --clean         Remove profanity from return lyrics
     -h, --help          Show this help screen
     -n, --number=<num>  Number of songs to download [default: 50]
     -s, --save=<artist> Save lyrics for <artist>
@@ -28,13 +29,14 @@ import tomllib
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
+from better_profanity import profanity
 from docopt import docopt
 from lyricsgenius import Genius
 
 arguments = {}
 
 
-@dataclass
+@dataclass(frozen=True)
 class Song:
     title: str
     lyrics: str
@@ -43,7 +45,7 @@ class Song:
 def main() -> None:
     """Main Method"""
     global arguments
-    arguments = docopt(__doc__, version="lyricsipsum 1.1.7")
+    arguments = docopt(__doc__, version="lyricsipsum 1.1.8")
 
     if not configDirectory().exists():
         configDirectory().mkdir(parents=True, exist_ok=True)
@@ -52,10 +54,10 @@ def main() -> None:
         saveLyricsToFile()
     else:
         song = random.choice(readLyricsFromFile())
+        lyrics = (profanity.censor(song.lyrics) if arguments["--clean"] else song.lyrics).strip()
         if arguments["--title"]:
-            print(f"{song.title}\n\n{song.lyrics}\n")
-        else:
-            print(f"\n{song.lyrics}\n")
+            print(f"{song.title}\n",file=sys.stderr)
+        print(lyrics)
 
     sys.exit(0)
 
@@ -66,7 +68,7 @@ def readLyricsFromFile() -> list[Song]:
         with jsonPath().open("r") as f:
             return [Song(**song) for song in json.load(f)]
     except FileNotFoundError:
-        print(f"No lyrics file found at {jsonPath()}. Please run with --save to create one.")
+        print(f"No lyrics file found at {jsonPath()}. Run with --save to create one.", file=sys.stderr)
         sys.exit(1)
 
 
@@ -91,13 +93,18 @@ def jsonPath() -> Path:
 
 def buildGenius() -> Genius:
     """Builds and returns a Genius object"""
+
+    if os.environ.get("GENIUS_ACCESS_TOKEN", "").strip() == "":
+        print("GENIUS_ACCESS_TOKEN environment variable is not set.", file=sys.stderr)
+        sys.exit(1)
+
     config = {}
     configFile = configDirectory() / "config.toml"
     if configFile.exists():
         with configFile.open("rb") as f:
             config = tomllib.load(f)
 
-    genius = Genius(os.environ.get("GENIUS_ACCESS_TOKEN", ""))
+    genius = Genius(os.environ.get("GENIUS_ACCESS_TOKEN"))
     genius.verbose = arguments["--verbose"] or config.get("client", {}).get("verbose", False)
     genius.skip_non_songs = config.get("client", {}).get("skip_non_songs", True)
     genius.excluded_terms = config.get("client", {}).get("excluded_terms", ["(Remix)", "(Live)"])
@@ -116,4 +123,3 @@ if __name__ == "__main__":
         main()
     except KeyboardInterrupt:
         sys.exit(0)
-
