@@ -8,10 +8,10 @@ Usage:
 
 Options:
     -c, --clean         Remove profanity from return lyrics
-    -d, --debug         Enable debug mode
+    -d, --debug         Debug mode
     -h, --help          Show this help screen
     -n, --number=<num>  Number of songs to download [default: 50]
-    -s, --save          Save lyrics to file
+    -s, --save=<artist> Save lyrics for <artist>
     -t, --title         Print the song title along with the lyrics
     --version           Prints the version
 ```

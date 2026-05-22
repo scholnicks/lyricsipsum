@@ -12,11 +12,11 @@ Usage:
 
 Options:
     -c, --clean         Remove profanity from return lyrics
+    -d, --debug         Debug mode
     -h, --help          Show this help screen
     -n, --number=<num>  Number of songs to download [default: 50]
     -s, --save=<artist> Save lyrics for <artist>
     -t, --title         Print the song title along with the lyrics
-    -v, --verbose       Enable verbose mode
     --version           Prints the version
 """
 
@@ -38,6 +38,7 @@ arguments = {}
 
 @dataclass(frozen=True)
 class Song:
+    artist: str
     title: str
     lyrics: str
 
@@ -45,7 +46,7 @@ class Song:
 def main() -> None:
     """Main Method"""
     global arguments
-    arguments = docopt(__doc__, version="lyricsipsum 1.1.8")
+    arguments = docopt(__doc__, version="lyricsipsum 2.0.0")
 
     if not configDirectory().exists():
         configDirectory().mkdir(parents=True, exist_ok=True)
@@ -56,7 +57,7 @@ def main() -> None:
         song = random.choice(readLyricsFromFile())
         lyrics = (profanity.censor(song.lyrics) if arguments["--clean"] else song.lyrics).strip()
         if arguments["--title"]:
-            print(f"{song.title}\n",file=sys.stderr)
+            print(f"{song.title}\n", file=sys.stderr)
         print(lyrics)
 
     sys.exit(0)
@@ -74,16 +75,26 @@ def readLyricsFromFile() -> list[Song]:
 
 def saveLyricsToFile() -> None:
     """Fetches lyrics from Genius and saves them to a file"""
-    songs = readLyricsFromFile() if jsonPath().exists() else []
+    songs = set(readLyricsFromFile()) if jsonPath().exists() else set()
+    count = len(songs)
+
     artist = buildGenius().search_artist(arguments["--save"], max_songs=int(arguments["--number"]), sort="popularity")
     for song in artist.songs:
         if song.lyrics:
-            songs.append(Song(title=song.title, lyrics=re.sub(r"\n+", "\n", song.lyrics).strip()))
+            if arguments["--debug"]:
+                print(f"Adding {song.title}", file=sys.stderr)
+            songs.add(
+                Song(
+                    artist=arguments["--save"],
+                    title=song.title,
+                    lyrics=re.sub(r"\n+", "\n", song.lyrics).strip('"').strip(),
+                )
+            )
 
     with jsonPath().open("w") as f:
         json.dump([asdict(s) for s in songs], f, indent=4)
 
-    print(f"Saved {len(songs)} songs to {jsonPath()}")
+    print(f"Added {len(songs) - count} songs to {jsonPath()}")
 
 
 def jsonPath() -> Path:
@@ -105,11 +116,18 @@ def buildGenius() -> Genius:
             config = tomllib.load(f)
 
     genius = Genius(os.environ.get("GENIUS_ACCESS_TOKEN"))
-    genius.verbose = arguments["--verbose"] or config.get("client", {}).get("verbose", False)
+    genius.verbose = arguments["--debug"] or config.get("client", {}).get("verbose", False)
     genius.skip_non_songs = config.get("client", {}).get("skip_non_songs", True)
     genius.excluded_terms = config.get("client", {}).get("excluded_terms", ["(Remix)", "(Live)"])
     genius.remove_section_headers = config.get("client", {}).get("remove_section_headers", True)
     genius.timeout = int(config.get("client", {}).get("timeout", 15))
+
+    if arguments["--debug"]:
+        print(
+            f"Genius: Verbose:{genius.verbose}, exclude:{genius.excluded_terms}, timeout:{genius.timeout}",
+            file=sys.stderr,
+        )
+
     return genius
 
 
