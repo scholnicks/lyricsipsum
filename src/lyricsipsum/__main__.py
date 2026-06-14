@@ -46,7 +46,7 @@ class Song:
 def main() -> None:
     """Main Method"""
     global arguments
-    arguments = docopt(__doc__, version="lyricsipsum 2.0.0")
+    arguments = docopt(__doc__, version="lyricsipsum 2.0.1")
 
     if not configDirectory().exists():
         configDirectory().mkdir(parents=True, exist_ok=True)
