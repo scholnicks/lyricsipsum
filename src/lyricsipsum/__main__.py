@@ -14,7 +14,7 @@ Options:
     -c, --clean         Remove profanity from return lyrics
     -d, --debug         Debug mode
     -h, --help          Show this help screen
-    -m, --max=<num>     Maximum number characters for the returned lyric
+    -m, --max=<num>     Maximum number characters for the returned lyrics
     -n, --number=<num>  Number of songs to download [default: 50]
     -s, --save=<artist> Save lyrics for <artist>
     -t, --title         Print the song title along with the lyrics
@@ -47,7 +47,7 @@ class Song:
 def main() -> None:
     """Main Method"""
     global arguments
-    arguments = docopt(__doc__, version="lyricsipsum 2.0.1")
+    arguments = docopt(__doc__, version="lyricsipsum 2.0.2")
 
     if not configDirectory().exists():
         configDirectory().mkdir(parents=True, exist_ok=True)
