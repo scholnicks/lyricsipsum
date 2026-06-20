@@ -14,6 +14,7 @@ Options:
     -c, --clean         Remove profanity from return lyrics
     -d, --debug         Debug mode
     -h, --help          Show this help screen
+    -m, --max=<num>     Maximum number characters for the returned lyric
     -n, --number=<num>  Number of songs to download [default: 50]
     -s, --save=<artist> Save lyrics for <artist>
     -t, --title         Print the song title along with the lyrics
@@ -58,7 +59,11 @@ def main() -> None:
         lyrics = (profanity.censor(song.lyrics) if arguments["--clean"] else song.lyrics).strip()
         if arguments["--title"]:
             print(f"{song.title}\n", file=sys.stderr)
-        print(lyrics)
+
+        if arguments["--max"]:
+            print(lyrics[0:int(arguments["--max"])])
+        else:
+            print(lyrics)
 
     sys.exit(0)
 
