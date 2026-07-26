@@ -11,7 +11,7 @@ Usage:
     lyricsipsum [options]
 
 Options:
-    -c, --clean         Remove profanity from return lyrics
+    -c, --clean         Remove profanity from returned lyrics
     -d, --debug         Debug mode
     -h, --help          Show this help screen
     -m, --max=<num>     Maximum number characters for the returned lyrics
