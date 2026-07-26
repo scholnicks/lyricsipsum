@@ -61,7 +61,7 @@ def main() -> None:
             print(f"{song.title}\n", file=sys.stderr)
 
         if arguments["--max"]:
-            print(lyrics[0:int(arguments["--max"])])
+            print(lyrics[0 : int(arguments["--max"])])
         else:
             print(lyrics)
 
