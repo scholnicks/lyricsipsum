@@ -30,10 +30,10 @@ mkdir -p ~/.config/lyricsipsum
 
 ### Create configuration file
 ```bash
-cat <<EOF > ~/.config/lyricsipsum.config.toml
+cat <<EOF > ~/.config/lyricsipsum/config.toml
 [client]
 verbose=true
-skip_non_song=true
+skip_non_songs=true
 excluded_terms=["(Remix)", "(Live)", "(Explicit)"]
 remove_section_headers=true
 timeout=15

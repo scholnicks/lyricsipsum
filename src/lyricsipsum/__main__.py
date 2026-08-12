@@ -28,6 +28,7 @@ import re
 import sys
 import tomllib
 from dataclasses import asdict, dataclass
+from importlib.metadata import version
 from pathlib import Path
 
 from better_profanity import profanity
@@ -47,7 +48,7 @@ class Song:
 def main() -> None:
     """Main Method"""
     global arguments
-    arguments = docopt(__doc__, version="lyricsipsum 2.0.4")
+    arguments = docopt(__doc__, version=f"lyricsipsum {version('lyricsipsum')}")
 
     if not configDirectory().exists():
         configDirectory().mkdir(parents=True, exist_ok=True)
@@ -84,6 +85,10 @@ def saveLyricsToFile() -> None:
     count = len(songs)
 
     artist = buildGenius().search_artist(arguments["--save"], max_songs=int(arguments["--number"]), sort="popularity")
+    if artist is None:
+        print(f'Artist "{arguments["--save"]}" not found.', file=sys.stderr)
+        sys.exit(1)
+
     for song in artist.songs:
         if song.lyrics:
             if arguments["--debug"]:
@@ -97,7 +102,11 @@ def saveLyricsToFile() -> None:
             )
 
     with jsonPath().open("w") as f:
-        json.dump([asdict(s) for s in songs], f, indent=4)
+        json.dump(
+            [asdict(s) for s in sorted(songs, key=lambda s: (s.artist.lower(), s.title.lower()))],
+            f,
+            indent=4,
+        )
 
     print(f"Added {len(songs) - count} songs to {jsonPath()}")
 
