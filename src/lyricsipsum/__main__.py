@@ -8,7 +8,7 @@
 lyricsipsum: Generates Lorem Ipsum text using a download song's lyrics
 
 Usage:
-    lyricsipsum [options]
+    lyricsipsum [options] [<title>]
 
 Options:
     -c, --clean         Remove profanity from returned lyrics
@@ -56,17 +56,29 @@ def main() -> None:
     if arguments["--save"]:
         saveLyricsToFile()
     else:
-        song = random.choice(readLyricsFromFile())
-        lyrics = (profanity.censor(song.lyrics) if arguments["--clean"] else song.lyrics).strip()
-        if arguments["--title"]:
-            print(f"{song.title}\n", file=sys.stderr)
-
-        if arguments["--max"]:
-            print(lyrics[0 : int(arguments["--max"])])
-        else:
-            print(lyrics)
+        findLyrics()
 
     sys.exit(0)
+
+def findLyrics() -> None:
+    """Finds songs and lyrics"""
+    allSongs = readLyricsFromFile()
+    if arguments["<title>"]:
+        song = next((s for s in allSongs if arguments["<title>"].lower() in s.title.lower()),None)
+        if not song:
+            print(f"{arguments["<title>"]} title not found", file=sys.stderr)
+            sys.exit(1)
+    else:
+        song = random.choice(allSongs)
+
+    lyrics = (profanity.censor(song.lyrics) if arguments["--clean"] else song.lyrics).strip()
+    if arguments["--title"]:
+        print(f"{song.title}\n", file=sys.stderr)
+
+    if arguments["--max"]:
+        print(lyrics[0 : int(arguments["--max"])])
+    else:
+        print(lyrics)
 
 
 def readLyricsFromFile() -> list[Song]:

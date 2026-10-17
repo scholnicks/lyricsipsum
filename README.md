@@ -4,7 +4,7 @@ lyricsipsum randomly selects a downloaded song's lyrics as a replacement for sta
 
 ```
 Usage:
-    lyricsipsum [options]
+    lyricsipsum [options] [<title>]
 
 Options:
     -c, --clean         Remove profanity from returned lyrics
