@@ -60,13 +60,14 @@ def main() -> None:
 
     sys.exit(0)
 
+
 def findLyrics() -> None:
     """Finds songs and lyrics"""
     allSongs = readLyricsFromFile()
     if arguments["<title>"]:
-        song = next((s for s in allSongs if arguments["<title>"].lower() in s.title.lower()),None)
+        song = next((s for s in allSongs if arguments["<title>"].lower() in s.title.lower()), None)
         if not song:
-            print(f"{arguments["<title>"]} title not found", file=sys.stderr)
+            print(f"{arguments['<title>']} title not found", file=sys.stderr)
             sys.exit(1)
     else:
         song = random.choice(allSongs)
