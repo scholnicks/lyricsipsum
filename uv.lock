@@ -147,15 +147,15 @@ wheels = [
 
 [[package]]
 name = "lyricsgenius"
-version = "3.15.0"
+version = "3.16.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "beautifulsoup4" },
     { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/31/24/6c64965d74e6758cd5d1ca0c2dff4a5a096a55182cf4d64c2a04d27bc971/lyricsgenius-3.15.0.tar.gz", hash = "sha256:e49fc72e6d90441249e1c4c7cb273c6c04bc2fb2e66c41817f4bfa491ff09eb3", size = 526893, upload-time = "2026-10-09T04:42:34.924Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/49/b6/ca884b5fb7773ff54b3269134c0b54a91734d9f22de4973b447647887b02/lyricsgenius-3.16.0.tar.gz", hash = "sha256:f8266816de70d35b7168dd08bf8da383fa6dff2afe7578260469c84184cdb82e", size = 528227, upload-time = "2026-11-13T07:06:41.907Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/9e/72/2f4e61aca119ce8fe35d396be6056cdb7068efc66709a6ef0cb3ddc109ed/lyricsgenius-3.15.0-py3-none-any.whl", hash = "sha256:dc4cd28403962b35c2dcbb78f7297df0ef889300c193664e5e359cfd1298ff32", size = 52196, upload-time = "2026-10-09T04:42:33.357Z" },
+    { url = "https://files.pythonhosted.org/packages/66/6f/7de04aa9725967bf3273fc532a926a7d0a6c205e103db7178917999366b6/lyricsgenius-3.16.0-py3-none-any.whl", hash = "sha256:eae52d4a872d073877ddb62c6d651282dd827894bd43e28c87e9e1640f535630", size = 52384, upload-time = "2026-11-13T07:06:40.206Z" },
 ]
 
 [[package]]
@@ -192,11 +192,11 @@ wheels = [
 
 [[package]]
 name = "soupsieve"
-version = "3.0.4"
+version = "4.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/19/63/0b6bae54546aed98d72f12d09df57b19a287f01c84d22047fa2e23772ab9/soupsieve-3.0.4.tar.gz", hash = "sha256:924fab84ae21604c19e175e1f39815eb6fa83ba23836e09e9de180925e5bc4c0", size = 119017, upload-time = "2026-10-22T00:45:26.362Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/95/48/21a393ff731b8f928fa4f8176f9a7ceba2252ee60a5149f25b45c292aa5c/soupsieve-4.1.tar.gz", hash = "sha256:ca9abf7126667010d8f6e9b39bfc1bc3b23c8aed9bcb0f54a754dde969bb8aab", size = 161955, upload-time = "2026-11-10T01:59:50.399Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/07/66/473f7ca0be0b06e38ee8c85ee2db184e3981bd769fac2e7c19c8a8865211/soupsieve-3.0.4-py3-none-any.whl", hash = "sha256:8412826614f9c632227067d0985aeb9f584bd15efc852955430e097a9fe7afbf", size = 42458, upload-time = "2026-10-22T00:45:24.843Z" },
+    { url = "https://files.pythonhosted.org/packages/88/73/6a2087c72975cfc07394623bca8d17654342ea4055ae368deafe5a81a542/soupsieve-4.1-py3-none-any.whl", hash = "sha256:e4d667b3974ce6e038e7390486b8093369854a1d345ffdd4c121dfc4a782e809", size = 52302, upload-time = "2026-11-10T01:59:48.571Z" },
 ]
 
 [[package]]
